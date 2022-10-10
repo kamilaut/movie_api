@@ -13,3 +13,5 @@ Timestamp: Sun Oct 02 2022 18:59:27 GMT+0200 (Central European Summer Time)
 URL: /favicon.ico
 Timestamp: Sun Oct 02 2022 18:59:27 GMT+0200 (Central European Summer Time)
 
+::ffff:127.0.0.1 - - [10/Oct/2022:16:52:01 +0000] "GET / HTTP/1.1" 200 28
+::ffff:127.0.0.1 - - [10/Oct/2022:16:52:01 +0000] "GET /favicon.ico HTTP/1.1" 404 150
