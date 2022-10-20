@@ -102,7 +102,7 @@ app.get ('/movies/genre/:genreName', (req,res ) => {
   }
 });
 
-app.get ('/movies/director/:directorName', (req,res ) => {
+app.get ('/movies/directors/:directorName', (req,res ) => {
   const { directorName } = req.params;
   const director = movies.find ( movie => movie.Director.Name === directorName).Director;
 
@@ -125,18 +125,18 @@ app.get('/users/:name', (req, res) => {
   { return users.name === req.params.name }));
 });
 
-// Adds data for a new users.
+// CREATE
 app.post('/users', (req, res) => {
-  let newUser = req.body;
+  const newUser = req.body;
 
-  if (!newUser.name) {
-    const message = 'Missing name in request body';
-    res.status(404).send(message);
-  } else {
+  if (newUser.name) {
     newUser.id = uuid.v4();
-    Users.push(newUser);
-    res.status(200).send(newUser);
+    users.push(newUser);
+    res.status (201).json(newUser)
+  } else {
+    res.status(400).send('users need names');
   }
+
 });
 
 app.listen(8080, () => {
