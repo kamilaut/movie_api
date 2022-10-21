@@ -5,23 +5,111 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Documentation</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="style.css" />
+
 </head>
 
 <body>
-  <h1>Documentation page</h1>
-  <p>
-    Movie API Essential Features
-    ● Return a list of ALL movies to the user
-    ● Return data (description, genre, director, image URL, whether it’s featured or not) about a
-    single movie by title to the user
-    ● Return data about a genre (description) by name/title (e.g., “Thriller”)
-    ● Return data about a director (bio, birth year, death year) by name
-    ● Allow new users to register
-    ● Allow users to update their user info (username, password, email, date of birth)
-    ● Allow users to add a movie to their list of favorites
-    ● Allow users to remove a movie from their list of favorites
-    ● Allow existing users to deregister. </p>
-  </body>
+  <p><h1>Documentation page</h1>
 
-  </html>
+    Movie API Essential Features
+    <div>
+      <details open>
+        <summary>
+          To return a list of ALL movies to the user
+        </summary>
+        <div>
+          Method: GET <code>&lt; URL: /movies &gt;</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>
+          To return data (description, genre, director, whether it’s featured or not) about a
+          single movie by title to the user
+        </summary>
+        <div>
+          Method: GET <code>&lt;  URL: /movies/:title &gt;</code>
+        </div>
+      </details>
+
+      <div>
+        <details open>
+          <summary>
+            To return data about any genre
+          </summary>
+          <div>
+            Method: GET <code>&lt;  URL: /movies/genre/:genreName &gt; </code>
+          </div>
+        </details>
+
+        <div>
+          <details open>
+            <summary>
+              To return data about a director by name
+            </summary>
+            <div>
+              Method: GET <code>&lt;  URL: /movies/directors/:directorName &gt;</code>
+            </div>
+          </details>
+
+          <div>
+            <details open>
+              <summary>
+                For new users to register
+              </summary>
+              <div>
+                Method: POST <code>&lt; URL: /users &gt;
+
+                </code>
+              </div>
+            </details>
+
+            <div>
+              <details open>
+                <summary>
+                  To allow users to update their user info
+                </summary>
+                <div>
+                  Method: PUT <code>&lt; URL: /users/:id
+
+                  </code>
+                </div>
+              </details>
+
+              <div>
+                <details open>
+                  <summary>
+                    To add a movie to user's list of favorites
+                  </summary>
+                  <div>
+                    Method: POST <code>&lt; URL: /users/:id/:movieTitle &gt;
+                    </code>
+                  </div>
+                </details>
+
+                <div>
+                  <details open>
+                    <summary>
+                      To remove a movie from user's list of favorites
+                    </summary>
+                    <div>
+                      Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt;
+                      </code>
+                    </div>
+                  </details>
+
+                  <div>
+                    <details open>
+                      <summary>
+                        Allows existing users to deregister
+                      </summary>
+                      <div>
+                        Method: DELETE <code>&lt; URL: /users/:id &gt;
+                        </code>
+                      </div>
+                    </details>
+                  </p>
+                </body>
+
+                </html>
