@@ -91,7 +91,7 @@ app.get ('/movies/:title', (req,res ) => {
 });
 
 //READ
-app.get ('/movies/genre/:genreName', (req,res ) => {
+app.get ('/movies/genres/:genreName', (req,res ) => {
   const { genreName } = req.params;
   const movie = movies.find ( movie => movie.Genre.Name === genreName);
 
@@ -104,10 +104,10 @@ app.get ('/movies/genre/:genreName', (req,res ) => {
 
 app.get ('/movies/directors/:directorName', (req,res ) => {
   const { directorName } = req.params;
-  const director = movies.find ( movie => movie.Director.Name === directorName).Director;
+  const movie = movies.find ( movie => movie.Director.Name === directorName);
 
-  if (director) {
-    res.status (200).json(director);
+  if (movie) {
+    res.status (200).json(movie.Director);
   } else {
     res.status (404).send ('no such director')
   }
@@ -121,8 +121,8 @@ app.get('/users', (req, res) => {
 // Gets the data about a single user, by name
 
 app.get('/users/:name', (req, res) => {
-  res.json(users.find((userst) =>
-  { return users.name === req.params.name }));
+  res.json(users.find((users) =>
+  { return user.name === req.params.name }));
 });
 
 // CREATE
@@ -203,6 +203,8 @@ app.delete('/users/:id', (req, res) => {
   }
 
 });
+
+app.use(express.static('public'));
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080');
