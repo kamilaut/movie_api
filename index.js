@@ -121,7 +121,7 @@ app.get('/users', (req, res) => {
 // Gets the data about a single user, by name
 
 app.get('/users/:name', (req, res) => {
-  res.json(users.find((users) =>
+  res.json(users.find((user) =>
   { return user.name === req.params.name }));
 });
 
@@ -143,7 +143,7 @@ app.post('/users', (req, res) => {
 
 app.put('/users/:id', (req, res) => {
   const { id } = req.params;
-  const updateUser = req.body;
+  const updatedUser = req.body;
 
   let user = users.find (user => user.id == id );
 
@@ -165,7 +165,7 @@ app.put('/users/:id/:movieTitle', (req, res) => {
 
   if (user) {
     user.favouriteMovies.push(movieTitle);
-    res.status(200).send ('${movieTitle} has been added to user ${id} array' );
+    res.status(200).send (`${movieTitle} has been added to user ${id} array` );
   } else {
     res.status(400).send('no such user')
   }
@@ -181,7 +181,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 
   if (user) {
     user.favouriteMovies = user.favouriteMovies.filter (title => title !== movieTitle);
-    res.status(200).send ('${movieTitle} has been removed from user ${id} array' );
+    res.status(200).send (`${movieTitle} has been removed from user ${id} array` );
   } else {
     res.status(400).send('no such user')
   }
@@ -197,7 +197,7 @@ app.delete('/users/:id', (req, res) => {
 
   if (user) {
     users = users.filter (user => user.id != id);
-    res.status(200).send ('user ${id} has been deleted' );
+    res.status(200).send (`user ${id} has been deleted` );
   } else {
     res.status(400).send('no such user')
   }
