@@ -9,8 +9,7 @@
 
   const Movies = Models.Movie;
   const Users = Models.User;
-  const Genres = Models.Genre;
-  const Directors = Models.Director;
+
 
   app.use(express.json());
 
@@ -72,6 +71,29 @@
     });
   });
 
+//GET movie by a genre
+app.get('/movies/genres/:genreName', (req, res) => {
+  Movies.findOne ({'Genre.Name': req.params.genreName })
+    .then((movie) => {
+      res.json(movie.Genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+//GET movies by a director
+app.get('/movies/directors/:directorName', (req, res) => {
+  Movies.findOne ({'Director.Name': req.params.directorName })
+    .then((movie) => {
+      res.json(movie.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+}); 
 
   //Add a user
   /* We’ll expect JSON in this format
@@ -86,7 +108,7 @@
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
+        return res.status(400).send(req.body.Username + ' already exists');
       } else {
         Users.create({
             Username: req.body.Username,
@@ -155,6 +177,22 @@
     }
   });
   });
+
+  // Delete a movie to a user's list of favorites
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavoriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
 
   // Delete a user by username
   app.delete('/users/:Username', (req, res) => {
