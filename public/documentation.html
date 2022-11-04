@@ -1,108 +1,80 @@
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Documentation</title>
-  <link rel="stylesheet" href="style.css" />
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="style.css" />
 
-</head>
+  </head>
 
-<body>
-  <p><h1>Documentation page</h1>
+  <body>
+    <p><h1>Documentation page</h1>
 
-    Movie API Essential Features </p>
-    <div>
-      <details open>
-        <summary>
-          To return a list of ALL movies to the user
-        </summary>
-        <div>
-          Method: GET <code>&lt; URL: /movies &gt;</code>
-        </div>
-      </details>
+      Movie API Essential Features </p>
+      <div>
+        <details open>
+          <summary>
+            To return a list of ALL movies to the user
+          </summary>
+          <div>
+            Method: GET <code>&lt; URL: /movies &gt;</code>
+          </div>
+        </details>
 
-      <details>
-        <summary>
-          To return data (description, genre, director, whether it’s featured or not) about a
-          single movie by title to the user
-        </summary>
-        <div>
-          Method: GET <code>&lt;  URL: /movies/:title &gt;</code>
-        </div>
-      </details>
-
-
-      <details>
-        <summary>
-          To return data about any genre
-        </summary>
-        <div>
-          Method: GET <code>&lt;  URL: /movies/genres/:genreName &gt; </code>
-        </div>
-      </details>
+        <details>
+          <summary>
+            To return data (description, genre, director, whether it’s featured or not) about a
+            single movie by title to the user
+          </summary>
+          <div>
+            Method: GET <code>&lt;  URL: /movies/:title &gt;</code>
+          </div>
+        </details>
 
 
-      <details>
-        <summary>
-          To return data about a director by name
-        </summary>
-        <div>
-          Method: GET <code>&lt;  URL: /movies/directors/:directorName &gt; </code>
-        </div>
-      </details>
+        <details>
+          <summary>
+            For new users to register
+          </summary>
+          <div>
+            Method: POST <code>&lt; URL: /users &gt; </code>
+          </div>
+        </details>
 
 
-      <details>
-        <summary>
-          For new users to register
-        </summary>
-        <div>
-          Method: POST <code>&lt; URL: /users &gt; </code>
-        </div>
-      </details>
+        <details>
+          <summary>
+            To allow users to update their user info
+          </summary>
+          <div>
+            Method: PUT <code>&lt; URL: /users/:id
+
+            </code>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            To add a movie to user's list of favorites
+          </summary>
+          <div>
+            Method: PUT <code>&lt; URL: /users/:id/:movieTitle &gt;  </code>
+          </div>
+        </details>
 
 
-      <details>
-        <summary>
-          To allow users to update their user info
-        </summary>
-        <div>
-          Method: PUT <code>&lt; URL: /users/:id
+        <details>
+          <summary>
+            To remove a movie from user's list of favorites
+          </summary>
+          <div>
+            Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt; </code>
+          </div>
+        </details>
 
-          </code>
-        </div>
-      </details>
+      </div>
+    </body>
 
-      <details>
-        <summary>
-          To add a movie to user's list of favorites
-        </summary>
-        <div>
-          Method: PUT <code>&lt; URL: /users/:id/:movieTitle &gt;  </code>
-        </div>
-      </details>
-
-
-      <details>
-        <summary>
-          To remove a movie from user's list of favorites
-        </summary>
-        <div>
-          Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt; </code>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          Allows existing users to deregister
-        </summary>
-        <div>
-          Method: DELETE <code>&lt; URL: /users/:id &gt; </code>
-        </div>
-      </details>
-    </div>
-  </body>
-
-  </html>
+    </html>
