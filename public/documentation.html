@@ -21,7 +21,12 @@
             </summary>
             <div>
               Method: GET <code>&lt; URL: /movies &gt;</code>
-                <details>Request body: None. Response: An array of movie records </details> 
+                <details><summary> Request Body Data</summary> 
+                  <p>none</p>
+                </details>
+              <details>
+                <summary>Response</summary> <p>An array of movie records</p> 
+              </details> 
             </div>
           </details>
 
@@ -31,7 +36,36 @@
             </summary>
             <div>
               Method: GET <code>&lt; URL: /movies/:Title &gt;</code>
-              <details> Request body: None. Response: JSON object containing the record for the movie requested </details>
+              <details>
+                <summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary>
+                <p>JSON object containing information about a single movie. Example:</p>
+                <pre>
+                  <code>
+{
+    "Genre": {
+        "Name": "...",
+        "Description": "..."
+    },
+    "Director": {
+        "Name": "...",
+        "Bio": "...",
+        "Birth": "...",
+        "Death": "..."
+    },
+    "Actors": [],
+    "_id": "635bcde5074a7685611cd62e",
+    "Title": "Autumn Sonata",
+    "Description": "...",
+    "ImagePath": "...",
+    "Featured": true
+}
+                  </code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -40,8 +74,22 @@
               To return data about a genre by name/title (e.g., “Thriller”)
             </summary>
             <div>
-              Method: GET <code>&lt;  URL: /movies/genres/:Name &gt;</code>
-              <details> Request body: None. Response: JSON object containing records of the movies by the requested genre </details>      
+              Method: GET <code>&lt;  URL: /movies/genres/:genreName &gt;</code>
+              <details><summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary>
+                <p> JSON object containing records of the movies by the requested genre. Example:</p>
+                 <pre>
+                  <code> 
+{
+    "Name": "Crime",
+    "Description": "A crime film is a type of film 
+  focusing on the lives of criminals." 
+}</code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -50,8 +98,26 @@
               To return data about a director by name
             </summary>
             <div>
-              Method: GET <code>&lt;  URL: /movies/directors/:Name &gt;</code>
-              <details> Request body: None. Response: JSON object with details about the director requested </details>      
+              Method: GET <code>&lt;  URL: /movies/directors/:directorName &gt;</code>
+                 <details>
+                <summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+               <summary>Response</summary>
+                <p> JSON object with details about the director requested. Example:
+             </p>
+                <pre>
+                  <code> 
+{
+    "Name": "Andrey Zvyagintsev",
+    "Bio": "Andrey Petrovich Zvyagintsev is a Russian 
+    film director and screenwriter.",
+    "Birth": "1965",
+    "Death": " "
+} </code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -61,7 +127,21 @@
             </summary>
             <div>
               Method: POST <code>&lt; URL: /users &gt; </code>
-              <details>Request body: JSON object {"name":"Kamila", "favoriteMovies": "XYZ", "Birthday": "1990-02-06", "Email": "kamila@gmail.com"}. Response: JSON object with the registered user info </details>
+              <details>
+                <summary>Request Body Data</summary> <p> JSON object holding data about the users to add.</p> 
+              </details>
+              <details> <summary>Response</summary>
+                <p> JSON object with the registered user info. Example</p>
+                <pre>
+                  <code>
+{
+                  "name":"Kamila", 
+                "FavoriteMovies": "XYZ", 
+              "Birthday": "1990-02-06", 
+            "Email": "kamila@gmail.com"
+}    </code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -70,8 +150,23 @@
               To allow users to update their user info (username, password, email, date of birth)
             </summary>
             <div>
-              Method: PUT <code>&lt; URL: /users/:id </code>
-              <details>Request body: JSON object {"name":"Kamila", "favoriteMovies": "XYZ", "Birthday": "1990-02-06", "Email": "kamila@gmail.com"}. Response: JSON object with the updated user details </details>
+              Method: PUT <code>&lt; URL: /users/:Username </code>
+              <details><summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary> 
+                <p>JSON object with the updated user details. Example </p>
+                <pre>
+                      <code>
+    {
+      "Name":"Kamila", 
+      "FavoriteMovies": "XYZ", 
+      "Birthday": "1990-02-06", 
+      "Email": "kamila@gmail.com"
+    }
+    </code>
+                  </details>
             </div>
           </details>
 
@@ -80,8 +175,30 @@
               To add a movie to user's list of favorites
             </summary>
             <div>
-              Method: PUT <code>&lt; URL: /users/:id/:movieTitle &gt;</code>
-              <details>Request body: None. Response: List of the user's updated favourite movies. Confirmation that the movie was added into the user's list </details>
+              Method: POST <code>&lt; URL: /users/:Username/movies/:MovieID &gt;</code>
+              <details> <summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary>
+               <p>List of the user's updated favourite movies. Confirmation that the movie was added into the user's list. Example: </p>
+                <pre>
+                  <code>
+{
+    "_id": "635c10dae2287d83a9ca369d",
+    "Username": "Kamila",
+    "Password": "12354",
+    "Email": "kamila@gmail.com",
+    "Birthday": "1992-07-07T11:30:05.000Z",
+    "FavoriteMovies": [
+        "635bd79045eec90be7d316e3",
+        "635bd75145eec90be7d316e2",
+        "635ae0aad3212ebd098dd5ef"
+    ]
+}
+            </code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -90,8 +207,29 @@
               To remove a movie from user's list of favorites
             </summary>
             <div>
-              Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt;</code>
-              <details>Request body: None. Response: List of the user's updated favourite movies. Confirmation that the movie was removed from the user's list </details>
+              Method: DELETE <code>&lt; URL: /users/:Username/movies/:MovieID &gt;</code>
+              <details><summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary>
+               <p> List of the user's updated favourite movies. Confirmation that the movie was removed from the user's list. Example: </p>
+                <pre>
+                  <code>
+{
+    "_id": "635c10dae2287d83a9ca369d",
+    "Username": "Kamila",
+    "Password": "12354",
+    "Email": "kamila@gmail.com",
+    "Birthday": "1992-07-07T11:30:05.000Z",
+    "FavoriteMovies": [
+        "635bd79045eec90be7d316e3",
+        "635bd75145eec90be7d316e2",
+    ]
+}
+            </code>
+                </pre>
+              </details>
             </div>
           </details>
 
@@ -101,7 +239,17 @@
             </summary>
             <div>
               Method: DELETE <code>&lt; URL: /users/:Username &gt;</code>
-              <details>Request body: None. Response: Confirmation that the user has been removed </details>
+              <details><summary>Request Body Data</summary>
+                <p>none</p>
+              </details>
+              <details>
+                <summary>Response</summary> <p> Confirmation that the user has been removed. Example: </p>
+                <pre>
+                  <code> 
+Kamila was delited.
+                  </code>
+                </pre>
+              </details>
             </div>
           </details>
 
