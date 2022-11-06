@@ -1,80 +1,110 @@
-  <!DOCTYPE html>
-  <html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Documentation</title>
+      <link rel="stylesheet" href="style.css" />
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="style.css" />
+    </head>
 
-  </head>
+    <body>
+      <p><h1>Movie API Documentation page</h1>
 
-  <body>
-    <p><h1>Documentation page</h1>
+        This API is a small movie databse with some essential features. 
 
-      Movie API Essential Features </p>
-      <div>
-        <details open>
-          <summary>
-            To return a list of ALL movies to the user
-          </summary>
-          <div>
-            Method: GET <code>&lt; URL: /movies &gt;</code>
-          </div>
-        </details>
+        <h3>Usage:</h3></p>
+        <div>
+          <details>
+            <summary>
+              To return a list of ALL movies to the user
+            </summary>
+            <div>
+              Method: GET <code>&lt; URL: /movies &gt;</code>
+                <details>Request body: None. Response: An array of movie records </details> 
+            </div>
+          </details>
 
-        <details>
-          <summary>
-            To return data (description, genre, director, whether it’s featured or not) about a
-            single movie by title to the user
-          </summary>
-          <div>
-            Method: GET <code>&lt;  URL: /movies/:title &gt;</code>
-          </div>
-        </details>
+          <details>
+            <summary>
+              To return data (description, genre, director, whether it’s featured or not) about a single movie by title 
+            </summary>
+            <div>
+              Method: GET <code>&lt; URL: /movies/:Title &gt;</code>
+              <details> Request body: None. Response: JSON object containing the record for the movie requested </details>
+            </div>
+          </details>
 
+          <details>
+            <summary>
+              To return data about a genre by name/title (e.g., “Thriller”)
+            </summary>
+            <div>
+              Method: GET <code>&lt;  URL: /movies/genres/:Name &gt;</code>
+              <details> Request body: None. Response: JSON object containing records of the movies by the requested genre </details>      
+            </div>
+          </details>
 
-        <details>
-          <summary>
-            For new users to register
-          </summary>
-          <div>
-            Method: POST <code>&lt; URL: /users &gt; </code>
-          </div>
-        </details>
+          <details>
+            <summary>
+              To return data about a director by name
+            </summary>
+            <div>
+              Method: GET <code>&lt;  URL: /movies/directors/:Name &gt;</code>
+              <details> Request body: None. Response: JSON object with details about the director requested </details>      
+            </div>
+          </details>
 
+          <details>
+            <summary>
+              For new users to register
+            </summary>
+            <div>
+              Method: POST <code>&lt; URL: /users &gt; </code>
+              <details>Request body: JSON object {"name":"Kamila", "favoriteMovies": "XYZ", "Birthday": "1990-02-06", "Email": "kamila@gmail.com"}. Response: JSON object with the registered user info </details>
+            </div>
+          </details>
 
-        <details>
-          <summary>
-            To allow users to update their user info
-          </summary>
-          <div>
-            Method: PUT <code>&lt; URL: /users/:id
+          <details>
+            <summary>
+              To allow users to update their user info (username, password, email, date of birth)
+            </summary>
+            <div>
+              Method: PUT <code>&lt; URL: /users/:id </code>
+              <details>Request body: JSON object {"name":"Kamila", "favoriteMovies": "XYZ", "Birthday": "1990-02-06", "Email": "kamila@gmail.com"}. Response: JSON object with the updated user details </details>
+            </div>
+          </details>
 
-            </code>
-          </div>
-        </details>
+          <details>
+            <summary>
+              To add a movie to user's list of favorites
+            </summary>
+            <div>
+              Method: PUT <code>&lt; URL: /users/:id/:movieTitle &gt;</code>
+              <details>Request body: None. Response: List of the user's updated favourite movies. Confirmation that the movie was added into the user's list </details>
+            </div>
+          </details>
 
-        <details>
-          <summary>
-            To add a movie to user's list of favorites
-          </summary>
-          <div>
-            Method: PUT <code>&lt; URL: /users/:id/:movieTitle &gt;  </code>
-          </div>
-        </details>
+          <details>
+            <summary>
+              To remove a movie from user's list of favorites
+            </summary>
+            <div>
+              Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt;</code>
+              <details>Request body: None. Response: List of the user's updated favourite movies. Confirmation that the movie was removed from the user's list </details>
+            </div>
+          </details>
 
+          <details>
+            <summary>
+              For existing users to deregister
+            </summary>
+            <div>
+              Method: DELETE <code>&lt; URL: /users/:Username &gt;</code>
+              <details>Request body: None. Response: Confirmation that the user has been removed </details>
+            </div>
+          </details>
 
-        <details>
-          <summary>
-            To remove a movie from user's list of favorites
-          </summary>
-          <div>
-            Method: DELETE <code>&lt; URL: /users/:id/:movieTitle &gt; </code>
-          </div>
-        </details>
-
-      </div>
-    </body>
-
-    </html>
+        </div>
+      </body>
+      </html>
