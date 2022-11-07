@@ -11,7 +11,7 @@
       <body>
         <p><h1>Movie API Documentation page</h1>
 
-          This API is a small movie databse with some essential features.
+          This RESTful API is a small movie databse with some essential features.
 
           <h3>Usage:</h3></p>
           <div>
@@ -71,7 +71,7 @@
 
             <details>
               <summary>
-                To return data about a genre by name/title (e.g., “Thriller”)
+                To return data about a genre by name/title (e.g., “Crime”)
               </summary>
               <div>
                 Method: GET <code>&lt;  URL: /movies/genres/:genreName &gt;</code>
@@ -83,11 +83,12 @@
                   <p> JSON object containing records of the movies by the requested genre. Example:</p>
                    <pre>
                     <code>
-  {
+{
       "Name": "Crime",
       "Description": "A crime film is a type of film
     focusing on the lives of criminals."
-  }                </code>
+                    }                
+                  </code>
                   </pre>
                 </details>
               </div>
@@ -128,18 +129,29 @@
               <div>
                 Method: POST <code>&lt; URL: /users &gt; </code>
                 <details>
-                  <summary>Request Body Data</summary> <p> JSON object holding data about the users to add.</p>
+                  <summary>Request Body Data</summary> <p> JSON object holding data about the users to add. Example:
+                  <pre>{
+        "Name":"...",
+        "FavoriteMovies": "...",
+        "Birthday": "...",
+        "Email": "..."
+      } </pre></p>
+
                 </details>
                 <details> <summary>Response</summary>
-                  <p> JSON object with the registered user info. Example</p>
+                  <p> JSON object with the registered user info. Example:</p>
                   <pre>
                     <code>
-  {
+{
                     "name":"Kamila",
                   "FavoriteMovies": "XYZ",
-                "Birthday": "1990-02-06",
+                "Birthday": "1992-07-07T11:30:05.000Z",
               "Email": "kamila@gmail.com"
-  }               </code>
+              "FavoriteMovies": [],
+              "_id": "635c10dae2287d83a9ca369d",
+              "__v":0
+}               
+                 </code>
                   </pre>
                 </details>
               </div>
@@ -152,20 +164,35 @@
               <div>
                 Method: PUT <code>&lt; URL: /users/:Username </code>
                 <details><summary>Request Body Data</summary>
-                  <p>none</p>
+                  <p><pre>
+                    {
+        "_id": "635c10dae2287d83a9ca369d",
+    "Username": "Kamila",
+    "Password": "12354",
+    "Email": "kamila@gmail.com",
+    "Birthday": "1992-07-07T11:30:05.000Z",
+    "FavoriteMovies": []
+    "__v":0
+      }
+    </pre></p>
                 </details>
                 <details>
                   <summary>Response</summary>
-                  <p>JSON object with the updated user details. Example </p>
+                  <p>JSON object with the updated user details. Example: </p>
                   <pre>
                         <code>
       {
-        "Name":"Kamila",
-        "FavoriteMovies": "XYZ",
-        "Birthday": "1990-02-06",
-        "Email": "kamila@gmail.com"
-      }
+    "_id": "635c10dae2287d83a9ca369d",
+    "Username": "Kamila_U",
+    "Password": "45321",
+    "Email": "kamila@gmail.com",
+    "Birthday": "1990-07-07T11:30:05.000Z",
+    "FavoriteMovies": ["Movie1", "Movie2"],
+    "__v":0
+
+}
       </code>
+    </pre>
                     </details>
               </div>
             </details>
@@ -181,7 +208,7 @@
                 </details>
                 <details>
                   <summary>Response</summary>
-                 <p>List of the user's updated favourite movies. Confirmation that the movie was added into the user's list. Example: </p>
+                 <p>Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
                   <pre>
                     <code>
   {
@@ -213,7 +240,7 @@
                 </details>
                 <details>
                   <summary>Response</summary>
-                 <p> List of the user's updated favourite movies. Confirmation that the movie was removed from the user's list. Example: </p>
+                 <p> Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
                   <pre>
                     <code>
   {
@@ -252,7 +279,6 @@
                 </details>
               </div>
             </details>
-
           </div>
         </body>
         </html>
