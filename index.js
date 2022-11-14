@@ -31,7 +31,7 @@
       app.use(morgan('common'));
 
       app.get ("/", (req, res) => {
-        res.send ("Welcome to myFlixDB");
+        res.send ("Welcome to the mirror stage");
       });
 
         //READ
