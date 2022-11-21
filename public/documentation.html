@@ -1,414 +1,414 @@
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width">
-          <title>Documentation</title>
-          <link rel="stylesheet" href="style.css" />
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Documentation</title>
+  <link rel="stylesheet" href="style.css" />
 
-        </head>
+</head>
 
-        <body>
-          <p><h1>Movie API Documentation page</h1>
+<body>
+  <p><h1>Movie API Documentation page</h1>
 
-            This RESTful API is a small movie databse with some essential features.
+    This RESTful API is a small movie databse with some essential features.
 
-            <h3>Usage:</h3></p>
+    <h3>Usage:</h3></p>
 
-            <div>
-              <details>
-                <summary>
-                 /login
-                </summary>
-                <div>
-                  Method: POST
-                    <details><summary> Request Body Data</summary>
-                      <p>{
-    "Username": "asdasd",
-    "Password": "123"
-  }</p>
-                    </details>
-                  <details>
-                    <summary>Response</summary> <p>JSON object holding data about the user including the hashed password. Example: </p>
-                    <pre>
-                      <code>
-    {
-        "user": {
-            "_id": "636e1c19141652fd732d00f1",
-            "Username": "Kamila",
-            "Password": "12354",
-            "Email": "kamila@gmail.com",
-            "Birthday": "1992-07-07T00:00:00.000Z",
-            "FavoriteMovies": [
-                "635bd79045eec90be7d316e3",
-                "635bd75145eec90be7d316e2"
-            ],
-            "__v": 0
-        },
-        "token": "tfybuyc"
-    }
+    <div>
+      <details>
+        <summary>
+         mirror-stage.herokuapp.com/login
+       </summary>
+       <div>
+        Method: POST
+        <details><summary> Request Body Data</summary>
+          <p>{
+            "Username": "asdasd",
+            "Password": "123"
+          }</p>
+        </details>
+        <details>
+          <summary>Response</summary> <p>JSON object holding data about the user including the hashed password. Example: </p>
+          <pre>
+            <code>
+              {
+                "user": {
+                  "_id": "636e1c19141652fd732d00f1",
+                  "Username": "Kamila",
+                  "Password": "12354",
+                  "Email": "kamila@gmail.com",
+                  "Birthday": "1992-07-07T00:00:00.000Z",
+                  "FavoriteMovies": [
+                  "635bd79045eec90be7d316e3",
+                  "635bd75145eec90be7d316e2"
+                  ],
+                  "__v": 0
+                },
+                "token": "tfybuyc"
+              }
 
-                      </code>
-                       </pre>
-                  </details>
+            </code>
+          </pre>
+        </details>
 
-    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  Basic HTTP Authentication (Username and Password)
-  </code>
-     </pre>
+        <details>
+          <summary> Authentication </summary>
+          <pre>
+            <code>
+              Basic HTTP Authentication (Username and Password)
+            </code>
+          </pre>
+        </details>
+
+
+      </div>
     </details>
 
 
-                </div>
-              </details>
+    <div>
+      <details>
+        <summary>
+          To return a list of ALL movies to the user
+        </summary>
+        <div>
+          Method: GET <code>&lt; URL: mirror-stage.herokuapp.com/movies &gt;</code>
+          <details><summary> Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary> <p>An array of movie records</p>
+          </details>
 
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
 
-            <div>
-              <details>
-                <summary>
-                  To return a list of ALL movies to the user
-                </summary>
-                <div>
-                  Method: GET <code>&lt; URL: /movies &gt;</code>
-                    <details><summary> Request Body Data</summary>
-                      <p>none</p>
-                    </details>
-                  <details>
-                    <summary>Response</summary> <p>An array of movie records</p>
-                  </details>
+        </div>
+      </details>
 
-    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
+      <details>
+        <summary>
+          To return data (description, genre, director, whether it’s featured or not) about a single movie by title
+        </summary>
+        <div>
+          Method: GET <code>&lt; URL: mirror-stage.herokuapp.com/movies/:Title &gt;</code>
+          <details>
+            <summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary>
+            <p>JSON object containing information about a single movie. Example:</p>
+            <pre>
+              <code>
+                {
+                  "Genre": {
+                    "Name": "...",
+                    "Description": "..."
+                  },
+                  "Director": {
+                    "Name": "...",
+                    "Bio": "...",
+                    "Birth": "...",
+                    "Death": "..."
+                  },
+                  "Actors": [],
+                  "_id": "635bcde5074a7685611cd62e",
+                  "Title": "Autumn Sonata",
+                  "Description": "...",
+                  "ImagePath": "...",
+                  "Featured": true
+                }
+              </code>
+            </pre>
+          </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
+
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          To return data about a genre by name/title (e.g., “Crime”)
+        </summary>
+        <div>
+          Method: GET <code>&lt;  URL: mirror-stage.herokuapp.com/movies/genres/:genreName &gt;</code>
+          <details><summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary>
+            <p> JSON object containing records of the movies by the requested genre. Example:</p>
+            <pre>
+              <code>
+                {
+                  "Name": "Crime",
+                  "Description": "A crime film is a type of film
+                  focusing on the lives of criminals."
+                }
+              </code>
+            </pre>
+          </details>
+
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
+
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          To return data about a director by name
+        </summary>
+        <div>
+          Method: GET <code>&lt;  URL: mirror-stage.herokuapp.com/movies/directors/:directorName &gt;</code>
+          <details>
+            <summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+           <summary>Response</summary>
+           <p> JSON object with details about the director requested. Example:
+           </p>
+           <pre>
+            <code>
+              {
+                "Name": "Andrey Zvyagintsev",
+                "Bio": "Andrey Petrovich Zvyagintsev is a Russian
+                film director and screenwriter.",
+                "Birth": "1965",
+                "Death": " "
+              }
+            </code>
+          </pre>
+        </details>
+        <details>
+          <summary> Authentication </summary>
+          <pre>
+            <code>
+              JWT Bearer Token
+            </code>
+          </pre>
+        </details>
+
+      </div>
     </details>
 
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  To return data (description, genre, director, whether it’s featured or not) about a single movie by title
-                </summary>
-                <div>
-                  Method: GET <code>&lt; URL: /movies/:Title &gt;</code>
-                  <details>
-                    <summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                    <summary>Response</summary>
-                    <p>JSON object containing information about a single movie. Example:</p>
-                    <pre>
-                      <code>
-      {
-          "Genre": {
-              "Name": "...",
-              "Description": "..."
-          },
-          "Director": {
-              "Name": "...",
-              "Bio": "...",
-              "Birth": "...",
-              "Death": "..."
-          },
-          "Actors": [],
-          "_id": "635bcde5074a7685611cd62e",
-          "Title": "Autumn Sonata",
-          "Description": "...",
-          "ImagePath": "...",
-          "Featured": true
-      }
-                      </code>
-                    </pre>
-                  </details>
     <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
+      <summary>
+        For new users to register
+      </summary>
+      <div>
+        Method: POST <code>&lt; URL: mirror-stage.herokuapp.com/users &gt; </code>
+        <details>
+          <summary>Request Body Data</summary> <p> JSON object holding data about the users to add. Example:
+            <pre>{
+              "Name":"...",
+              "FavoriteMovies": "...",
+              "Birthday": "...",
+              "Email": "..."
+            } </pre></p>
 
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  To return data about a genre by name/title (e.g., “Crime”)
-                </summary>
-                <div>
-                  Method: GET <code>&lt;  URL: /movies/genres/:genreName &gt;</code>
-                  <details><summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                    <summary>Response</summary>
-                    <p> JSON object containing records of the movies by the requested genre. Example:</p>
-                     <pre>
-                      <code>
-  {
-        "Name": "Crime",
-        "Description": "A crime film is a type of film
-      focusing on the lives of criminals."
-                      }
-                    </code>
-                    </pre>
-                  </details>
-
-    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
-
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  To return data about a director by name
-                </summary>
-                <div>
-                  Method: GET <code>&lt;  URL: /movies/directors/:directorName &gt;</code>
-                     <details>
-                    <summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                   <summary>Response</summary>
-                    <p> JSON object with details about the director requested. Example:
-                 </p>
-                      <pre>
-                        <code>
-      {
-          "Name": "Andrey Zvyagintsev",
-          "Bio": "Andrey Petrovich Zvyagintsev is a Russian
-          film director and screenwriter.",
-          "Birth": "1965",
-          "Death": " "
-      }
-                      </code>
-                   </pre>
-                 </details>
-    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
-
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  For new users to register
-                </summary>
-                <div>
-                  Method: POST <code>&lt; URL: /users &gt; </code>
-                  <details>
-                    <summary>Request Body Data</summary> <p> JSON object holding data about the users to add. Example:
-                    <pre>{
-          "Name":"...",
-          "FavoriteMovies": "...",
-          "Birthday": "...",
-          "Email": "..."
-        } </pre></p>
-
-                  </details>
-                  <details> <summary>Response</summary>
-                    <p> JSON object with the registered user info. Example:</p>
-                    <pre>
-                      <code>
-  {
-                      "name":"Kamila",
-                    "FavoriteMovies": "XYZ",
+          </details>
+          <details> <summary>Response</summary>
+            <p> JSON object with the registered user info. Example:</p>
+            <pre>
+              <code>
+                {
+                  "name":"Kamila",
+                  "FavoriteMovies": "XYZ",
                   "Birthday": "1992-07-07T11:30:05.000Z",
-                "Email": "kamila@gmail.com"
-                "FavoriteMovies": [],
-                "_id": "635c10dae2287d83a9ca369d",
-                "__v":0
-  }
-                   </code>
-                    </pre>
-                  </details>
-                    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  none
-  </code>
-     </pre>
-    </details>
-                </div>
-              </details>
+                  "Email": "kamila@gmail.com"
+                  "FavoriteMovies": [],
+                  "_id": "635c10dae2287d83a9ca369d",
+                  "__v":0
+                }
+              </code>
+            </pre>
+          </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                none
+              </code>
+            </pre>
+          </details>
+        </div>
+      </details>
 
-              <details>
-                <summary>
-                  To allow users to update their user info (username, password, email, date of birth)
-                </summary>
-                <div>
-                  Method: PUT <code>&lt; URL: /users/:Username </code>
-                  <details><summary>Request Body Data</summary>
-                    <p><pre>
-                      {
-      "Username": "Kamila",
-      "Password": "12354",
-      "Email": "kamila@gmail.com",
-      "Birthday": "1992-07-07T11:30:05.000Z",
-        }
-      </pre></p>
-                  </details>
-                  <details>
-                    <summary>Response</summary>
-                    <p>JSON object with the updated user details. Example: </p>
-                    <pre>
-                          <code>
-        {
-      "_id": "635c10dae2287d83a9ca369d",
-      "Username": "Kamila_U",
-      "Password": "45321",
-      "Email": "kamila@gmail.com",
-      "Birthday": "1990-07-07T11:30:05.000Z",
-      "FavoriteMovies": ["Movie1", "Movie2"],
-      "__v":0
+      <details>
+        <summary>
+          To allow users to update their user info (username, password, email, date of birth)
+        </summary>
+        <div>
+          Method: PUT <code>&lt; URL: mirror-stage.herokuapp.com/users/:Username </code>
+          <details><summary>Request Body Data</summary>
+            <p><pre>
+              {
+                "Username": "Kamila",
+                "Password": "12354",
+                "Email": "kamila@gmail.com",
+                "Birthday": "1992-07-07T11:30:05.000Z",
+              }
+            </pre></p>
+          </details>
+          <details>
+            <summary>Response</summary>
+            <p>JSON object with the updated user details. Example: </p>
+            <pre>
+              <code>
+                {
+                  "_id": "635c10dae2287d83a9ca369d",
+                  "Username": "Kamila_U",
+                  "Password": "45321",
+                  "Email": "kamila@gmail.com",
+                  "Birthday": "1990-07-07T11:30:05.000Z",
+                  "FavoriteMovies": ["Movie1", "Movie2"],
+                  "__v":0
 
-  }
-        </code>
-      </pre>
-                      </details>
+                }
+              </code>
+            </pre>
+          </details>
 
-                        <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
-                </div>
-              </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
+        </div>
+      </details>
 
-              <details>
-                <summary>
-                  To add a movie to user's list of favorites
-                </summary>
-                <div>
-                  Method: POST <code>&lt; URL: /users/:Username/movies/:MovieID &gt;</code>
-                  <details> <summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                    <summary>Response</summary>
-                   <p>Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
-                    <pre>
-                      <code>
-    {
-        "_id": "635c10dae2287d83a9ca369d",
-        "Username": "Kamila",
-        "Password": "12354",
-        "Email": "kamila@gmail.com",
-        "Birthday": "1992-07-07T11:30:05.000Z",
-        "FavoriteMovies": [
-            "635bd79045eec90be7d316e3",
-            "635bd75145eec90be7d316e2",
-            "635ae0aad3212ebd098dd5ef"
-        ]
-    }
-                </code>
-                    </pre>
-                  </details>
-    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
+      <details>
+        <summary>
+          To add a movie to user's list of favorites
+        </summary>
+        <div>
+          Method: POST <code>&lt; URL: mirror-stage.herokuapp.com/users/:Username/movies/:MovieID &gt;</code>
+          <details> <summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary>
+            <p>Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
+            <pre>
+              <code>
+                {
+                  "_id": "635c10dae2287d83a9ca369d",
+                  "Username": "Kamila",
+                  "Password": "12354",
+                  "Email": "kamila@gmail.com",
+                  "Birthday": "1992-07-07T11:30:05.000Z",
+                  "FavoriteMovies": [
+                  "635bd79045eec90be7d316e3",
+                  "635bd75145eec90be7d316e2",
+                  "635ae0aad3212ebd098dd5ef"
+                  ]
+                }
+              </code>
+            </pre>
+          </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
 
-                </div>
-              </details>
+        </div>
+      </details>
 
-              <details>
-                <summary>
-                  To remove a movie from user's list of favorites
-                </summary>
-                <div>
-                  Method: DELETE <code>&lt; URL: /users/:Username/movies/:MovieID &gt;</code>
-                  <details><summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                    <summary>Response</summary>
-                   <p> Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
-                    <pre>
-                      <code>
-    {
-        "_id": "635c10dae2287d83a9ca369d",
-        "Username": "Kamila",
-        "Password": "12354",
-        "Email": "kamila@gmail.com",
-        "Birthday": "1992-07-07T11:30:05.000Z",
-        "FavoriteMovies": [
-            "635bd79045eec90be7d316e3",
-            "635bd75145eec90be7d316e2",
-        ]
-    }
-                </code>
-                    </pre>
-                  </details>
-                    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
-                </div>
-              </details>
+      <details>
+        <summary>
+          To remove a movie from user's list of favorites
+        </summary>
+        <div>
+          Method: DELETE <code>&lt; URL: mirror-stage.herokuapp.com/users/:Username/movies/:MovieID &gt;</code>
+          <details><summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary>
+            <p> Updated user object (which includes the updated FavoriteMovies list along with the all user's info).Example: </p>
+            <pre>
+              <code>
+                {
+                  "_id": "635c10dae2287d83a9ca369d",
+                  "Username": "Kamila",
+                  "Password": "12354",
+                  "Email": "kamila@gmail.com",
+                  "Birthday": "1992-07-07T11:30:05.000Z",
+                  "FavoriteMovies": [
+                  "635bd79045eec90be7d316e3",
+                  "635bd75145eec90be7d316e2",
+                  ]
+                }
+              </code>
+            </pre>
+          </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
+        </div>
+      </details>
 
-              <details>
-                <summary>
-                  For existing users to deregister
-                </summary>
-                <div>
-                  Method: DELETE <code>&lt; URL: /users/:Username &gt;</code>
-                  <details><summary>Request Body Data</summary>
-                    <p>none</p>
-                  </details>
-                  <details>
-                    <summary>Response</summary> <p> Confirmation that the user has been removed. Example: </p>
-                    <pre>
-                      <code>
-    Kamila was delited.
-                      </code>
-                    </pre>
-                  </details>
-                    <details>
-      <summary> Authentication </summary>
-      <pre>
-        <code>
-  JWT Bearer Token
-  </code>
-     </pre>
-    </details>
-                </div>
-              </details>
-            </div>
-          </body>
-          </html>
+      <details>
+        <summary>
+          For existing users to deregister
+        </summary>
+        <div>
+          Method: DELETE <code>&lt; URL: mirror-stage.herokuapp.com/users/:Username &gt;</code>
+          <details><summary>Request Body Data</summary>
+            <p>none</p>
+          </details>
+          <details>
+            <summary>Response</summary> <p> Confirmation that the user has been removed. Example: </p>
+            <pre>
+              <code>
+                Kamila was delited.
+              </code>
+            </pre>
+          </details>
+          <details>
+            <summary> Authentication </summary>
+            <pre>
+              <code>
+                JWT Bearer Token
+              </code>
+            </pre>
+          </details>
+        </div>
+      </details>
+    </div>
+  </body>
+  </html>
