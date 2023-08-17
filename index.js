@@ -71,6 +71,34 @@ app.get(
       });
   }
 );
+
+// Get a user's favorite movies
+app.get('/users/:Username/favorites', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+
+      // Get the list of favorite movie IDs from the user document
+      const favoriteMovieIDs = user.FavoriteMovies;
+
+      // Get the details of favorite movies based on their IDs
+      Movies.find({ _id: { $in: favoriteMovieIDs } })
+        .then((favoriteMovies) => {
+          res.json(favoriteMovies);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 // Get a user by username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
