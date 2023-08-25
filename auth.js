@@ -1,10 +1,35 @@
+  /**
+ * @fileoverview Handles authentication using JWT and Passport.
+ * @author Your Name
+ */
+
+/**
+ * JWT Secret for signing the tokens.
+ * @type {string}
+ * @const
+ */
   const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
 
+/**
+ * JSON Web Token module.
+ * @const
+ */
   const jwt = require('jsonwebtoken'),
+  
+/**
+ * Passport module for handling user authentication.
+ * @const
+ */
     passport = require('passport');
 
   require('./passport'); // Your local passport file
+// Your local passport file
 
+/**
+ * Generates a JWT token for a user.
+ * @param {Object} user - The user for whom to generate the token.
+ * @returns {string} The generated JWT token.
+ */
 
   let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
@@ -14,8 +39,12 @@
     });
   }
 
-
   /* POST login. */
+  
+/**
+ * Handles POST requests to the login route.
+ * @param {Object} router - The router object to which to attach the route.
+ */
   module.exports = (router) => {
     router.post('/login', (req, res) => {
       passport.authenticate('local', { session: false }, (error, user, info) => {
