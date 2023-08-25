@@ -1,12 +1,15 @@
-# movie_api
- 
+# Movie API Documentation
+
+Welcome to the documentation for the Movie API, which allows you to access and manage information about movies and users. This API is built using Node.js, Express.js, and MongoDB. 
 The server-side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
 Movie_api is the client-side component of an application using REACT. A web application (client-side and server-side) built using full-stack JavaScript technologies. The project will demonstrate a full-stack JavaScript development, including APIs, web server frameworks, databases, business logic, authentication, data security, and more. 
 
-# Movie API Documentation
+Deployed client side apps using this API
 
-Welcome to the documentation for the Movie API, which allows you to access and manage information about movies and users. This API is built using Node.js, Express.js, and MongoDB.
+[Mirror stafe](https://mirror-stage.netlify.app/login) -- [git](https://github.com/kamilaut/myFlix-client)
+
+[MovieFlix](https://kamilaut.github.io/MovieFlix-Angular/) --  [git](https://github.com/kamilaut/MovieFlix-Angular)
 
 ## Table of Contents
 
