@@ -99,7 +99,8 @@ Start the server:
  bash
  
 ```
-npm start ```
+npm start
+```
 
 The server will be running on port 8080 by default.
 
