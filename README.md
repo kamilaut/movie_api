@@ -1,5 +1,7 @@
 # Movie API Documentation
 
+[Documentation](https://mirror-stage.herokuapp.com/documentation.html)
+
 Welcome to the documentation for the Movie API, which allows you to access and manage information about movies and users. This API is built using Node.js, Express.js, and MongoDB. 
 The server-side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
