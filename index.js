@@ -56,6 +56,28 @@ app.get("/", (req, res) => {
  * @route {GET} /movies
  * @param {authentication} - Bearer token (JWT)
  * @returns {Array<Object>} Array of movie objects.
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * [
+ *   {
+ *     "Title": "",
+ *     "Description": "",
+ *     "Genre": {
+ *       "Name": "",
+ *       "Description": "",
+ *     },
+ *     "Director": {
+ *       "Name": "",
+ *       "Bio": "",
+ *     },
+ *     "Actors": [""],
+ *     "ImagePath": "",
+ *     "Featured": Boolean,
+ *   }
+ * ]
  */
 //READ
 app.get("/movies", passport.authenticate('jwt', { session: false }), function (req, res) {
@@ -181,6 +203,15 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
  * @param {string} genreName - Name of the genre.
  * @param {authentication} - Bearer token (JWT)
  * @returns {Object} Genre object of the movie.
+ * * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ *   "Name": "",
+ *   "Description": "",
+ * }
  */
 //GET movie by a genre
 app.get('/movies/genres/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
