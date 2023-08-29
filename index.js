@@ -22,21 +22,6 @@ app.use(cors());
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
-/**
- * @file index.js
- * @description This file includes the main server logic for the movie API.
- * @requires express
- * @requires body-parser
- * @requires uuid
- * @requires express-validator
- * @requires morgan
- * @requires mongoose
- * @requires ./models.js
- * @requires cors
- * @requires ./auth
- * @requires passport
- * @requires ./passport
- */
 
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -50,7 +35,6 @@ app.get("/", (req, res) => {
 });
 /**
  * Get all movies
- * @function
  * @name getAllMovies
  * @description Endpoint to get all movies.
  * @route {GET} /movies
@@ -79,7 +63,6 @@ app.get("/", (req, res) => {
  *   }
  * ]
  */
-//READ
 app.get("/movies", passport.authenticate('jwt', { session: false }), function (req, res) {
   Movies.find()
     .then((movies) => {
@@ -93,15 +76,24 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), function (r
 
 
 /**
- * Get all users
- * @function
- * @name getAllUsers
  * @description Endpoint to get all users.
- * @route {GET} /users
+ * @name GET /users
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * [
+ *   {
+ *     "Username": "",
+ *     "Password": "",
+ *     "Email":"",
+ *     "Birthday":"",
+ *     "FavoriteMovies": [""]
+ *    }
+ * ]
  * @param {authentication} - Bearer token (JWT)
- * @returns {Array<Object>} Array of user objects.
  */
-// Get all users
 app.get('/users', passport.authenticate('jwt', { session: false }), function (req, res) {
   Users.find()
     .then((users) => {
@@ -114,16 +106,30 @@ app.get('/users', passport.authenticate('jwt', { session: false }), function (re
 });
 
 /**
- * Get a movie by title
- * @function
- * @name getMovieByTitle
  * @description Endpoint to get a movie by title.
- * @route {GET} /movies/:Title
- * @param {string} Title - Title of the movie.
+ * @name GET /movies/:Title
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": {
+ *     "Name": "",
+ *     "Description": "",
+ *   },
+ *   "Director": {
+ *     "Name": "",
+ *     "Bio": "",
+ *   },
+ *  "Actors": [""],
+ *  "ImagePath": "",
+ *  "Featured": Boolean,
+ * }
  * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Movie object.
  */
-//READ
 app.get(
   "/movies/:Title", passport.authenticate("jwt", { session: false }), (req, res) => {
     Movies.findOne({ Title: req.params.Title })
@@ -138,16 +144,30 @@ app.get(
 );
 
 /**
- * Get a user's favorite movies
- * @function
- * @name getUserFavoriteMovies
- * @description Endpoint to get a user's favorite movies.
- * @route {GET} /users/:Username/favorites
- * @param {string} Username - Username of the user.
+ * @description Endpoint to get users favorite movies.
+ * @name GET /users/:Username/favorites
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": {
+ *     "Name": "",
+ *     "Description": "",
+ *   },
+ *   "Director": {
+ *     "Name": "",
+ *     "Bio": "",
+ *   },
+ *  "Actors": [""],
+ *  "ImagePath": "",
+ *  "Featured": Boolean,
+ * }
  * @param {authentication} - Bearer token (JWT)
- * @returns {Array<Object>} Array of favorite movie objects.
  */
-// Get a user's favorite movies
 app.get('/users/:Username/favorites', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
     .then((user) => {
@@ -172,17 +192,24 @@ app.get('/users/:Username/favorites', passport.authenticate('jwt', { session: fa
       res.status(500).send('Error: ' + err);
     });
 });
+
 /**
- * Get a user by username
- * @function
- * @name getUserByUsername
  * @description Endpoint to get a user by username.
- * @route {GET} /users/:Username
- * @param {string} Username - Username of the user.
+ * @name GET /users/:Username
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email":"",
+ *  "Birthday":"",
+ *  "FavoriteMovies": [""]
+ * }
  * @param {authentication} - Bearer token (JWT)
- * @returns {Object} User object.
  */
-// Get a user by username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
     .then((user) => {
@@ -195,25 +222,19 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 /**
- * Get a movie by genre
- * @function
- * @name getMovieByGenre
  * @description Endpoint to get a movie by genre.
- * @route {GET} /movies/genres/:genreName
- * @param {string} genreName - Name of the genre.
- * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Genre object of the movie.
- * * @example
+ * @name GET /movies/genres/:genreName
+ * @example
  * // Request data format
  * none
  * @example
  * // Response data format
- * {
- *   "Name": "",
- *   "Description": "",
- * }
+ *     {
+ *       "Name": "",
+ *       "Description": "",
+ *     }
+ * @param {authentication} - Bearen token (JWT)
  */
-//GET movie by a genre
 app.get('/movies/genres/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.genreName })
     .then((movie) => {
@@ -226,16 +247,19 @@ app.get('/movies/genres/:genreName', passport.authenticate('jwt', { session: fal
 });
 
 /**
- * Get movies by a director
- * @function
- * @name getMoviesByDirector
- * @description Endpoint to get movies by a director.
- * @route {GET} /movies/directors/:directorName
- * @param {string} directorName - Name of the director.
- * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Director object of the movie.
+ * @description Endpoint to get a movie.
+ * @name GET /movies/directors/:directorName
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ *     {
+ *       "Name": "",
+ *       "Bio": "",
+ *     }
+ * @param {authentication} - Bearen token (JWT)
  */
-//GET movies by a director
 app.get('/movies/directors/:directorName', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.directorName })
     .then((movie) => {
@@ -248,25 +272,28 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 });
 
 /**
- * Add a user
- * @function
- * @name addUser
  * @description Endpoint to add a user.
- * @route {POST} /users
- * @param {string} Username - Username of the user.
- * @param {string} Password - Password of the user.
- * @param {string} Email - Email of the user.
- * @param {Date} Birthday - Birthday of the user.
- * @returns {Object} Created user object.
+ * @name POST /users
+  * @example
+ * // Request data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "",
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday": "",
+ *  "FavoriteMovies": []
+ * }
+ * @param {authentication} - none
  */
-//Add a user
-/* We’ll expect JSON in this format
-{
-Username: String,
-Password: String,
-Email: String,
-Birthday: Date
-}*/
 app.post('/users',
   // Validation logic here for request
   //you can either use a chain of methods like .not().isEmpty()
@@ -314,30 +341,28 @@ app.post('/users',
       });
   });
 
-// Update a user's info, by username
-/* We’ll expect JSON in this format
-{
-Username: String,
-(required)
-Password: String,
-(required)
-Email: String,
-(required)
-Birthday: Date
-}*/
-
 /**
- * Update a user's info by username
- * @function
- * @name updateUserByUsername
- * @description Endpoint to update a user's info by username.
- * @route {PUT} /users/:Username
- * @param {string} Username - Username of the user.
- * @param {string} Password - Password of the user.
- * @param {string} Email - Email of the user.
- * @param {Date} Birthday - Birthday of the user.
- * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Updated user object.
+ * @description Update information about a user
+ * @name PUT /users/:Username
+ * @example
+ * // Request data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "",
+ * "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ *  "FavoriteMovies": []
+ * }
+ * @param {authentication} - Bearen token (JWT)
  */
 app.put(
   '/users/:Username',
@@ -385,17 +410,22 @@ app.put(
 );
 
 /**
- * Add a movie to a user's favorite list
- * @function
- * @name addMovieToFavorites
- * @description Endpoint to add a movie to a user's favorite list.
- * @route {POST} /users/:Username/movies/:MovieID
- * @param {string} Username - Username of the user.
- * @param {string} MovieID - ID of the movie to be added to favorites.
- * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Updated user object with the added movie.
+ * @description Add a movie to a user's favorite list
+ * @name POST /users/:Username/movies/:MovieID
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ * "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ *  "FavoriteMovies": []
+ * }
+ * @param {authentication} - Bearen token (JWT)
  */
-// Add a movie to a user's list of favorites
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $push: { FavoriteMovies: req.params.MovieID }
@@ -412,17 +442,22 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 /**
- * Delete a movie from a user's favorite list
- * @function
- * @name deleteMovieFromFavorites
- * @description Endpoint to delete a movie from a user's favorite list.
- * @route {DELETE} /users/:Username/movies/:MovieID
- * @param {string} Username - Username of the user.
- * @param {string} MovieID - ID of the movie to be deleted from favorites.
- * @param {authentication} - Bearer token (JWT)
- * @returns {Object} Updated user object with the removed movie.
+ * @description Delete a movie from a user's favorite list
+ * @name DELETE /users/:Username/movies/:MovieID
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * {
+ * "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ *  "FavoriteMovies": []
+ * }
+ * @param {authentication} - Bearen token (JWT)
  */
-// Delete a movie to a user's list of favorites
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $pull: { FavoriteMovies: req.params.MovieID }
@@ -439,16 +474,16 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
 });
 
 /**
- * Delete a user by username
- * @function
- * @name deleteUserByUsername
- * @description Endpoint to delete a user by username.
- * @route {DELETE} /users/:Username
- * @param {string} Username - Username of the user to be deleted.
- * @param {authentication} - Bearer token (JWT)
- * @returns {string} Deletion success message.
+ * @description Delete a user by username
+ * @name DELETE /users/:Username
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * string message
+ * @param {authentication} - Bearen token (JWT)
  */
-// Delete a user by username
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
@@ -464,11 +499,15 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
     });
 });
 /**
- * Start the server
- * @function
- * @name startServer
- * @description Starts the server on the specified port.
- * @param {number} port - Port number to listen on.
+ * @description serves static files in the "public" folder
+ * @name GET /users/:Username
+ * @example
+ * // Request data format
+ * none
+ * @example
+ * // Response data format
+ * file response 
+ * @param {authentication} - none
  */
 app.use(express.static('public'));
 

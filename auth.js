@@ -1,9 +1,4 @@
 /**
- * Handles user authentication using JSON Web Tokens (JWT) and Passport.
- * @module auth
- */
-
-/**
  * JWT Secret key for signing tokens.
  * @constant {string}
  */
@@ -38,41 +33,33 @@ const generateJWTToken = (user) => {
   });
 };
 
-/**
- * Handles POST requests to the login route.
- * @function
- * @name handleLoginRoute
- * @param {Object} router - Express router object to attach the route.
- */
 module.exports = (router) => {
-  /**
-   * Login route
-   * @name POST /login
-   * @function
-   * @param {Object} req - Express request object.
-   * @param {Object} res - Express response object.
-   * @returns {Object} Response containing user and token data.
-   * @throws {Error} If authentication fails or an error occurs.
-   * @example
-   * // Request data format
-   * {
-   *   "Username": "",
-   *   "Password": ""
-   * }
-   * @example
-   * // Response data format
-   * {
-   *   user: {
-   *     "_id": "",
-   *     "Username": "",
-   *     "Password": "",
-   *     "Email": "",
-   *     "Birthday": "",
-   *     "FavoriteMovies": []
-   *   },
-   *   token: ""
-   * }
-   */
+ /**
+ * @description Login route
+ * @name POST /login
+ * @function
+ * @example
+ * // Request data format
+ * {
+ *  "Username": "",
+ *  "Password": ""
+ * }
+ * @example
+ * // Response data format
+ * {
+ *  user: {
+ *    "_id": "",
+ *    "Username": "",
+ *    "Password": "",
+ *    "Email": "",
+ *    "Birthday": "" ,
+ *    "FavoriteMovies": []
+ *  },
+ *  token: ""
+ * }
+ * @param {authentication} - Basic HTTP authentication (Username, Password)
+ * @param {Object} router - Express router object
+ */
   router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
