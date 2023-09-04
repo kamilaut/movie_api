@@ -151,7 +151,8 @@ app.get(
  * none
  * @example
  * // Response data format
- * {
+ *[
+ *  {
  *   "Title": "",
  *   "Description": "",
  *   "Genre": {
@@ -165,7 +166,9 @@ app.get(
  *  "Actors": [""],
  *  "ImagePath": "",
  *  "Featured": Boolean,
- * }
+ *  "_id": ""
+ *  }
+ * ]
  * @param {authentication} - Bearer token (JWT)
  */
 app.get('/users/:Username/favorites', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -424,7 +427,7 @@ app.put(
  *  "Birthday:" ""
  *  "FavoriteMovies": []
  * }
- * @param {authentication} - Bearen token (JWT)
+ * @param {authentication} - none
  */
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
